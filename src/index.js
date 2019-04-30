@@ -10,8 +10,8 @@ const init = () => {
 
   ReactDOM.render(
       <App
-        gameTime = {settings.gameTime}
-        errorCount = {settings.errorCount}
+        gameTime={settings.gameTime}
+        errorCount={settings.errorCount}
       />,
       document.querySelector(`.main`)
   );

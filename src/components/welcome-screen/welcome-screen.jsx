@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import plural from 'plural-ru';
 
 const WelcomeScreen = (props) => {
   const {time, errorCount} = props;
@@ -12,7 +13,7 @@ const WelcomeScreen = (props) => {
       <p className="welcome__text">Правила просты:</p>
       <ul className="welcome__rules-list">
         <li>За {time} минут нужно ответить на все вопросы.</li>
-        <li>Можно допустить {errorCount} ошибки.</li>
+        <li>Можно допустить {errorCount} {plural(errorCount, `ошибку`, `ошибки`, `ошибок`)}.</li>
       </ul>
       <p className="welcome__text">Удачи!</p>
     </section>
