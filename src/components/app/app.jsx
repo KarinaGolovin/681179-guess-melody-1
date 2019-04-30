@@ -7,7 +7,7 @@ const App = (props) => {
   const {gameTime, errorCount} = props;
 
   return <WelcomeScreen
-    time = {gameTime}
+    time={gameTime}
     errorCount={errorCount}
   />;
 };

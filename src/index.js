@@ -1,13 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/app/app.jsx';
+import settings from './settings.js';
 
 const init = () => {
-  const settings = {
-    gameTime: 10,
-    errorCount: 5,
-  };
-
   ReactDOM.render(
       <App
         gameTime={settings.gameTime}
