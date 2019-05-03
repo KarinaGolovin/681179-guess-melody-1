@@ -1,13 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/app/app.jsx';
-import settings from './settings.js';
+import Settings from './settings.js';
 
 const init = () => {
   ReactDOM.render(
       <App
-        gameTime={settings.gameTime}
-        errorCount={settings.errorCount}
+        gameTime={Settings.GAME_TIME}
+        errorCount={Settings.ERROR_COUNT}
       />,
       document.querySelector(`.main`)
   );
