@@ -1,6 +1,6 @@
-const settings = {
-  gameTime: 10,
-  errorCount: 5,
+const Settings = {
+  GAME_TIME: 7,
+  ERROR_COUNT: 4,
 };
 
-export default settings;
+export default Settings;
