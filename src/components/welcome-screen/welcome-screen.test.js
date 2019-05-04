@@ -2,15 +2,16 @@ import React from 'react';
 import renderer from 'react-test-renderer';
 import WelcomeScreen from '../welcome-screen/welcome-screen.jsx';
 
-describe(`WelcomeScreen test`, () => {
+describe(`Render WelcomeScreen page without crush`, () => {
   it(`WelcomeScreen correctly renders`, () => {
-    const tree = renderer.create(
+    const component = renderer.create(
         <WelcomeScreen
           time={0}
           errorCount={0}
+          onClick={jest.fn()}
         />
     ).toJSON();
 
-    expect(tree).toMatchSnapshot();
+    expect(component).toMatchSnapshot();
   });
 });

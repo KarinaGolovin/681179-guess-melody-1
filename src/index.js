@@ -8,6 +8,7 @@ const init = () => {
       <App
         gameTime={Settings.GAME_TIME}
         errorCount={Settings.ERROR_COUNT}
+        onClick={() => {}}
       />,
       document.querySelector(`.main`)
   );
