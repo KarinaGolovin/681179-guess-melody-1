@@ -57,7 +57,7 @@ it(`Click on WelcomeScreen button switches to the first question page`, () => {
   button.simulate(`click`);
   app.update();
 
-  expect(app.state(`question`)).toEqual(0);
+  expect(app.state(`currentQuestion`)).toEqual(0);
 
   const title = app.find(`.game__title`);
 

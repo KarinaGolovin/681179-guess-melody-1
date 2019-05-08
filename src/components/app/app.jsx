@@ -10,25 +10,23 @@ class App extends PureComponent {
     super(props);
 
     this.state = {
-      question: -1,
+      currentQuestion: -1,
     };
   }
 
   render() {
     const {questions} = this.props;
-    const {question} = this.state;
+    const {currentQuestion} = this.state;
 
-    return <div>
-      {this._showScreen(questions[question], () => {
-        this.setState({
-          question: question + 1 >= questions.length ? -1 : question + 1,
-        });
-      })}
-    </div>;
+    return this._showScreen(questions[currentQuestion], () => {
+      this.setState({
+        currentQuestion: currentQuestion + 1 >= currentQuestion.length ? -1 : currentQuestion + 1,
+      });
+    });
   }
 
-  _showScreen(question, onClick) {
-    if (!question) {
+  _showScreen(currentQuestion, onClick) {
+    if (!currentQuestion) {
       const {errorCount, gameTime} = this.props;
 
       return <WelcomeScreen
@@ -38,12 +36,12 @@ class App extends PureComponent {
       />;
     }
 
-    switch (question.type) {
+    switch (currentQuestion.type) {
       case `genre`: return (
         <section className="game game--genre">
           <Header />
           <GuessTrackScreen
-            question={question}
+            question={currentQuestion}
             onAnswer={onClick}
           />
         </section>
@@ -53,7 +51,7 @@ class App extends PureComponent {
         <section className="game game--artist">
           <Header />
           <GuessArtistScreen
-            question={question}
+            question={currentQuestion}
             onAnswer={onClick}
           />;
         </section>

@@ -24,7 +24,7 @@ const GuessTrackScreen = ({question, onAnswer}) => {
               </div>
             </div>
           );
-        })};
+        })}
         <button className="game__submit button" type="submit">Ответить</button>
       </form>
     </section>

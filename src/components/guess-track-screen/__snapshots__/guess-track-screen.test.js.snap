@@ -143,7 +143,6 @@ exports[`GuessTrackScreen correctly rendered 1`] = `
         </label>
       </div>
     </div>
-    ;
     <button
       className="game__submit button"
       type="submit"

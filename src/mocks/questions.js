@@ -1,6 +1,6 @@
 const Questions = [
   {
-    type: `genre game`,
+    type: `genre`,
     genre: `rock`,
     answers: [
       {
