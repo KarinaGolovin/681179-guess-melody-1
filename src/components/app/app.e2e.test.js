@@ -50,7 +50,6 @@ it(`Click on WelcomeScreen button switches to the first question page`, () => {
   const app = mount(<App
     gameTime={0}
     errorCount={0}
-    onClick={jest.fn()}
     questions={questions}
   />);
 
@@ -58,8 +57,5 @@ it(`Click on WelcomeScreen button switches to the first question page`, () => {
   button.simulate(`click`);
   app.update();
 
-  const title = app.find(`.game__title`);
-
-  expect(title).toHaveLength(1);
-  expect(title.text().indexOf(`rock`)).toBeGreaterThanOrEqual(0);
+  expect(app.state(`question`)).toEqual(0);
 });
