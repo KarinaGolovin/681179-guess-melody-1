@@ -1,6 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import GuessTracksScreen from './guess-tracks-screen.jsx';
+import GuessTrackScreen from './guess-track-screen.jsx';
 
 const mock = {
   genre: `rock`,
@@ -24,11 +24,10 @@ const mock = {
   ]
 };
 
-it(`GuessTracksScreen correctly rendered`, () => {
-  const {genre, answers} = mock;
-  const component = renderer.create(<GuessTracksScreen
-    genre={genre}
-    answers={answers}
+it(`GuessTrackScreen correctly rendered`, () => {
+  const component = renderer.create(<GuessTrackScreen
+    question={mock}
+    onAnswer={jest.fn()}
   />).toJSON();
 
   expect(component).toMatchSnapshot();

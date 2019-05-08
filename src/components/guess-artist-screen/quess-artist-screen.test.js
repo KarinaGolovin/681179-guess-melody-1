@@ -5,7 +5,7 @@ import GuessArtistScreen from './guess-artist-screen.jsx';
 const mock = {
   song: {
     artist: `Test`,
-    trackSrc: `https://upload.wikimedia.org/wikipedia/commons/1/1f/Uganda_flag_and_national_anthem_-_Oh_Uganda_Land_o.ogg`,
+    trackSrc: ``,
   },
   answers: [
     {
@@ -28,10 +28,9 @@ const mock = {
 };
 
 it(`GuessArtistScreen correctly rendered`, () => {
-  const {song, answers} = mock;
   const component = renderer.create(<GuessArtistScreen
-    song={song}
-    answers={answers}
+    question={mock}
+    onAnswer={jest.fn()}
   />).toJSON();
 
   expect(component).toMatchSnapshot();

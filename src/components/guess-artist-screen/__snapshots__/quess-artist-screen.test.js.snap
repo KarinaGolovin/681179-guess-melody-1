@@ -17,11 +17,12 @@ exports[`GuessArtistScreen correctly rendered 1`] = `
       type="button"
     />
     <audio
-      src="https://upload.wikimedia.org/wikipedia/commons/1/1f/Uganda_flag_and_national_anthem_-_Oh_Uganda_Land_o.ogg"
+      src=""
     />
   </div>
   <form
     className="game__artist"
+    onChange={[MockFunction]}
   >
     <div
       className="artist"

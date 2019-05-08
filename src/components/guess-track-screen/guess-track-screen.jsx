@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 
-const GuessTracksScreen = ({question, onAnswer}) => {
+const GuessTrackScreen = ({question, onAnswer}) => {
   const {genre, answers} = question;
   return (
     <section className="game__screen">
@@ -31,7 +31,7 @@ const GuessTracksScreen = ({question, onAnswer}) => {
   );
 };
 
-GuessTracksScreen.propTypes = {
+GuessTrackScreen.propTypes = {
   question: PropTypes.shape({
     genre: PropTypes.oneOf([`rock`, `jazz`, `blues`, `pop`]).isRequired,
     answers: PropTypes.arrayOf(PropTypes.shape({
@@ -42,4 +42,4 @@ GuessTracksScreen.propTypes = {
   onAnswer: PropTypes.func.isRequired,
 };
 
-export default GuessTracksScreen;
+export default GuessTrackScreen;

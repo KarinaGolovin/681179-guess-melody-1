@@ -1,7 +1,7 @@
 import React from 'react';
 import {configure, mount} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import GuessTracksScreen from './guess-tracks-screen.jsx';
+import GuessTrackScreen from './guess-track-screen.jsx';
 
 configure({adapter: new Adapter()});
 
@@ -18,10 +18,10 @@ const mock = {
   },
 };
 
-it(`Check if PreventDefault works correctly on GuessTracksScreen submit`, () => {
+it(`Check if PreventDefault works correctly on GuessTrackScreen submit`, () => {
   const {question} = mock;
   const onAnswer = jest.fn();
-  const trackQuestion = mount(<GuessTracksScreen
+  const trackQuestion = mount(<GuessTrackScreen
     onAnswer={onAnswer}
     question={question}
   />);

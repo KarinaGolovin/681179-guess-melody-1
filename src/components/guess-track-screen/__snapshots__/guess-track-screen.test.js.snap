@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`GuessTracksScreen correctly rendered 1`] = `
+exports[`GuessTrackScreen correctly rendered 1`] = `
 <section
   className="game__screen"
 >
@@ -13,6 +13,7 @@ exports[`GuessTracksScreen correctly rendered 1`] = `
   </h2>
   <form
     className="game__tracks"
+    onSubmit={[Function]}
   >
     <div
       className="track"

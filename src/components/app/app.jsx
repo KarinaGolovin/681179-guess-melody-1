@@ -2,7 +2,7 @@ import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import WelcomeScreen from '../welcome-screen/welcome-screen.jsx';
 import GuessArtistScreen from '../guess-artist-screen/guess-artist-screen.jsx';
-import GuessTracksScreen from '../guess-track-screen/guess-track-screen.jsx';
+import GuessTrackScreen from '../guess-track-screen/guess-track-screen.jsx';
 
 class App extends PureComponent {
   constructor(props) {
@@ -17,7 +17,7 @@ class App extends PureComponent {
     const {questions} = this.props;
     const {question} = this.state;
 
-    return <section>
+    return <section className="game game--genre">
       {this._showScreen(questions[question], () => {
         this.setState({
           question: question + 1 >= questions.length ? -1 : question + 1,
@@ -38,7 +38,7 @@ class App extends PureComponent {
     }
 
     switch (question.type) {
-      case `genre`: return <GuessTracksScreen
+      case `genre`: return <GuessTrackScreen
         question={question}
         onAnswer={onClick}
       />;
