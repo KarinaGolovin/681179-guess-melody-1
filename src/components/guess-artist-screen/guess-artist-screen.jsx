@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const GuessArtistScreen = (props) => {
-  const {song, answers} = props;
+const GuessArtistScreen = ({question, onAnswer}) => {
+  const {song, answers} = question;
 
   return (
     <section className="game__screen">
@@ -11,7 +11,7 @@ const GuessArtistScreen = (props) => {
         <button className="track__button track__button--play" type="button"></button>
         <audio src={song.trackSrc}></audio>
       </div>
-      <form className="game__artist">
+      <form className="game__artist" onChange={onAnswer}>
         {answers.map((it, i) => {
           return (
             <div className="artist" key={`answer-${i}`}>
@@ -29,14 +29,17 @@ const GuessArtistScreen = (props) => {
 };
 
 GuessArtistScreen.propTypes = {
-  song: PropTypes.shape({
-    artist: PropTypes.string.isRequired,
-    trackSrc: PropTypes.string.isRequired,
+  question: PropTypes.shape({
+    song: PropTypes.shape({
+      artist: PropTypes.string.isRequired,
+      trackSrc: PropTypes.string.isRequired,
+    }),
+    answers: PropTypes.arrayOf(PropTypes.shape({
+      artist: PropTypes.string.isRequired,
+      picture: PropTypes.string.isRequired,
+    })),
   }),
-  answers: PropTypes.arrayOf(PropTypes.shape({
-    artist: PropTypes.string.isRequired,
-    picture: PropTypes.string.isRequired,
-  })),
+  onAnswer: PropTypes.func.isRequired,
 };
 
 export default GuessArtistScreen;

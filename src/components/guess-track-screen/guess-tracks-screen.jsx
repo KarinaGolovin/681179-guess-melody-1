@@ -2,12 +2,15 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 
-const GuessTracksScreen = (props) => {
-  const {genre, answers} = props;
+const GuessTracksScreen = ({question, onAnswer}) => {
+  const {genre, answers} = question;
   return (
     <section className="game__screen">
       <h2 className="game__title">Выберите {genre} треки</h2>
-      <form className="game__tracks">
+      <form className="game__tracks" onSubmit={(evt) => {
+        evt.preventDefault();
+        onAnswer();
+      }}>
         {answers.map((it, i) => {
           return (
             <div className="track" key={`answer-${i}`}>
@@ -29,11 +32,14 @@ const GuessTracksScreen = (props) => {
 };
 
 GuessTracksScreen.propTypes = {
-  genre: PropTypes.oneOf([`rock`, `jazz`, `blues`, `pop`]).isRequired,
-  answers: PropTypes.arrayOf(PropTypes.shape({
-    trackSrc: PropTypes.string.isRequired,
-    trackGenre: PropTypes.oneOf([`rock`, `jazz`, `blues`, `pop`]).isRequired,
-  }))
+  question: PropTypes.shape({
+    genre: PropTypes.oneOf([`rock`, `jazz`, `blues`, `pop`]).isRequired,
+    answers: PropTypes.arrayOf(PropTypes.shape({
+      trackSrc: PropTypes.string.isRequired,
+      trackGenre: PropTypes.oneOf([`rock`, `jazz`, `blues`, `pop`]).isRequired,
+    })),
+  }),
+  onAnswer: PropTypes.func.isRequired,
 };
 
 export default GuessTracksScreen;

@@ -58,4 +58,9 @@ it(`Click on WelcomeScreen button switches to the first question page`, () => {
   app.update();
 
   expect(app.state(`question`)).toEqual(0);
+
+  const title = app.find(`.game__title`);
+
+  expect(title).toHaveLength(1);
+  expect(title.text().indexOf(`rock`)).toBeGreaterThanOrEqual(0);
 });
