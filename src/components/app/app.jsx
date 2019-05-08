@@ -1,5 +1,6 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
+import Header from '../header/header.jsx';
 import WelcomeScreen from '../welcome-screen/welcome-screen.jsx';
 import GuessArtistScreen from '../guess-artist-screen/guess-artist-screen.jsx';
 import GuessTrackScreen from '../guess-track-screen/guess-track-screen.jsx';
@@ -17,13 +18,13 @@ class App extends PureComponent {
     const {questions} = this.props;
     const {question} = this.state;
 
-    return <section className="game game--genre">
+    return <div>
       {this._showScreen(questions[question], () => {
         this.setState({
           question: question + 1 >= questions.length ? -1 : question + 1,
         });
       })}
-    </section>;
+    </div>;
   }
 
   _showScreen(question, onClick) {
@@ -38,15 +39,25 @@ class App extends PureComponent {
     }
 
     switch (question.type) {
-      case `genre`: return <GuessTrackScreen
-        question={question}
-        onAnswer={onClick}
-      />;
+      case `genre`: return (
+        <section className="game game--genre">
+          <Header />
+          <GuessTrackScreen
+            question={question}
+            onAnswer={onClick}
+          />
+        </section>
+      );
 
-      case `artist`: return <GuessArtistScreen
-        question={question}
-        onAnswer={onClick}
-      />;
+      case `artist`: return (
+        <section className="game game--artist">
+          <Header />
+          <GuessArtistScreen
+            question={question}
+            onAnswer={onClick}
+          />;
+        </section>
+      );
     }
 
     return null;
