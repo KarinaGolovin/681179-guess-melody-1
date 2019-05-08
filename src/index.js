@@ -11,6 +11,7 @@ const init = () => {
         gameTime={Settings.GAME_TIME}
         errorCount={Settings.ERROR_COUNT}
         onClick={() => {}}
+        questions={Questions}
       />,
       document.querySelector(`.main`)
   );

@@ -15,7 +15,8 @@ const App = (props) => {
 App.propTypes = {
   gameTime: PropTypes.number,
   errorCount: PropTypes.number,
-  onClick: PropTypes.func
+  onClick: PropTypes.func,
+  questions: PropTypes.array.isRequired,
 };
 
 export default App;
