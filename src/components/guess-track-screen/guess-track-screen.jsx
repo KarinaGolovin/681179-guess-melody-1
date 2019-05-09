@@ -20,7 +20,7 @@ class GuessTrackScreen extends PureComponent {
         <form className="game__tracks" onSubmit={(evt) => {
           evt.preventDefault();
           const selectedAnswers = Object.keys(this.state.formData).filter((key) => {
-            return this.formData[key];
+            return this.state.formData[key];
           });
 
           onAnswer(selectedAnswers);
@@ -33,7 +33,7 @@ class GuessTrackScreen extends PureComponent {
                   <audio src={it.trackSrc}></audio>
                 </div>
                 <div className="game__answer">
-                  <input className="game__input visually-hidden" type="checkbox" name="answer" value={`answer-${i}`} id={`answer-${i}`} onChange={this._toggleState} />
+                  <input className="game__input visually-hidden" type="checkbox" name="answer" value={`answer-${i}`} id={`answer-${i}`} onChange={this._toggleState.bind(this)} />
                   <label className="game__check" htmlFor={`answer-${i}`}>Отметить</label>
                 </div>
               </div>
@@ -50,7 +50,7 @@ class GuessTrackScreen extends PureComponent {
     const checked = evt.target.checked;
 
     this.setState({
-      formData: Object.assign({}, this.setState.formData, {
+      formData: Object.assign({}, this.state.formData, {
         [inputName]: checked
       })
     });
