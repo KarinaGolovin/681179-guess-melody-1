@@ -18,7 +18,9 @@ class App extends PureComponent {
     const {questions} = this.props;
     const {currentQuestion} = this.state;
 
-    return this._showScreen(questions[currentQuestion], () => {
+    return this._showScreen(questions[currentQuestion], (answer) => {
+      console.log(answer);
+
       this.setState({
         currentQuestion: currentQuestion + 1 >= currentQuestion.length ? -1 : currentQuestion + 1,
       });
@@ -63,10 +65,10 @@ class App extends PureComponent {
 }
 
 App.propTypes = {
-  gameTime: PropTypes.number,
-  errorCount: PropTypes.number,
-  questions: PropTypes.array.isRequired,
-  onClick: PropTypes.func
+  onClick: PropTypes.func,
+  gameTime: PropTypes.number.isRequired,
+  errorCount: PropTypes.number.isRequired,
+  questions: PropTypes.arrayOf(PropTypes.object.isRequired),
 };
 
 export default App;
