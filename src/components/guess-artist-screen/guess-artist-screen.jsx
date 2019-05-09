@@ -11,7 +11,9 @@ const GuessArtistScreen = ({question, onAnswer}) => {
         <button className="track__button track__button--play" type="button"></button>
         <audio src={song.trackSrc}></audio>
       </div>
-      <form className="game__artist" onChange={onAnswer}>
+      <form className="game__artist" onChange={(evt) => {
+        return onAnswer(evt.target.value);
+      }}>
         {answers.map((it, i) => {
           return (
             <div className="artist" key={`answer-${i}`}>

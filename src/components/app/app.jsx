@@ -18,9 +18,7 @@ class App extends PureComponent {
     const {questions} = this.props;
     const {currentQuestion} = this.state;
 
-    return this._showScreen(questions[currentQuestion], (answer) => {
-      console.log(answer);
-
+    return this._showScreen(questions[currentQuestion], () => {
       this.setState({
         currentQuestion: currentQuestion + 1 >= currentQuestion.length ? -1 : currentQuestion + 1,
       });
