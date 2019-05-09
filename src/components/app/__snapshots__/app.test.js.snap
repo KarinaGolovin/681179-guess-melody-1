@@ -40,7 +40,9 @@ exports[`Render App page without crush App correctly renders 1`] = `
     <li>
       За 
       0
-       минут нужно ответить на все вопросы.
+       
+      минут
+       нужно ответить на все вопросы.
     </li>
     <li>
       Можно допустить 

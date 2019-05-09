@@ -40,7 +40,9 @@ exports[`Render WelcomeScreen page without crush WelcomeScreen correctly renders
     <li>
       За 
       0
-       минут нужно ответить на все вопросы.
+       
+      минут
+       нужно ответить на все вопросы.
     </li>
     <li>
       Можно допустить 
