@@ -8,24 +8,22 @@ class GuessTrackScreen extends PureComponent {
     this.state = {
       formData: {},
     };
+
+    this._toggleState = this._toggleState.bind(this);
+    this._handleSubmit = this._handleSubmit.bind(this);
   }
 
   render() {
-    const {question, onAnswer} = this.props;
+    const {question} = this.props;
     const {genre, answers} = question;
 
     return (
       <section className="game__screen">
         <h2 className="game__title">Выберите {genre} треки</h2>
-        <form className="game__tracks" onSubmit={(evt) => {
-          evt.preventDefault();
-          const selectedAnswers = Object.keys(this.state.formData).filter((key) => {
-            return this.state.formData[key];
-          });
-
-          onAnswer(selectedAnswers);
-        }}>
+        <form className="game__tracks" onSubmit={this._handleSubmit}>
           {answers.map((it, i) => {
+            const isChecked = this.state.formData[`answer-${i}`] || false;
+
             return (
               <div className="track" key={`answer-${i}`}>
                 <button className="track__button track__button--play" type="button"></button>
@@ -33,7 +31,7 @@ class GuessTrackScreen extends PureComponent {
                   <audio src={it.trackSrc}></audio>
                 </div>
                 <div className="game__answer">
-                  <input className="game__input visually-hidden" type="checkbox" name="answer" value={`answer-${i}`} id={`answer-${i}`} onChange={this._toggleState.bind(this)} />
+                  <input className="game__input visually-hidden" type="checkbox" name="answer" checked={isChecked} value={`answer-${i}`} id={`answer-${i}`} onChange={this._toggleState} />
                   <label className="game__check" htmlFor={`answer-${i}`}>Отметить</label>
                 </div>
               </div>
@@ -43,6 +41,16 @@ class GuessTrackScreen extends PureComponent {
         </form>
       </section>
     );
+  }
+
+  _handleSubmit(evt) {
+    evt.preventDefault();
+
+    const selectedAnswers = Object.keys(this.state.formData).filter((key) => {
+      return this.state.formData[key];
+    });
+
+    this.props.onAnswer(selectedAnswers);
   }
 
   _toggleState(evt) {

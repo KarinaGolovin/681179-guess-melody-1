@@ -20,7 +20,7 @@ class App extends PureComponent {
 
     return this._showScreen(questions[currentQuestion], () => {
       this.setState({
-        currentQuestion: currentQuestion + 1 >= currentQuestion.length ? -1 : currentQuestion + 1,
+        currentQuestion: (currentQuestion + 1) >= questions.length ? -1 : currentQuestion + 1,
       });
     });
   }

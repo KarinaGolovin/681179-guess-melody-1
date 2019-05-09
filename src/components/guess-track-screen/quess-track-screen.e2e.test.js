@@ -21,14 +21,14 @@ const mock = {
 it(`Check if PreventDefault works correctly on GuessTrackScreen submit`, () => {
   const {question} = mock;
   const onAnswer = jest.fn();
-  const trackQuestion = mount(<GuessTrackScreen
+  const trackScreen = mount(<GuessTrackScreen
     onAnswer={onAnswer}
     question={question}
   />);
 
   const formSendPrevention = jest.fn();
 
-  trackQuestion.find(`form`).simulate(`submit`, {
+  trackScreen.find(`form`).simulate(`submit`, {
     preventDefault: formSendPrevention,
   });
 
