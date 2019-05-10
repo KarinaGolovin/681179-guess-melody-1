@@ -1,0 +1,117 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`GuessArtistScreen correctly rendered 1`] = `
+<section
+  className="game__screen"
+>
+  <h2
+    className="game__title"
+  >
+    Кто исполняет эту песню?
+  </h2>
+  <div
+    className="game__track"
+  >
+    <button
+      className="track__button track__button--play"
+      type="button"
+    />
+    <audio
+      src=""
+    />
+  </div>
+  <form
+    className="game__artist"
+    onChange={[Function]}
+  >
+    <div
+      className="artist"
+    >
+      <input
+        className="artist__input visually-hidden"
+        id="answer-0"
+        name="answer"
+        type="radio"
+        value="answer-0"
+      />
+      <label
+        className="artist__name"
+        htmlFor="answer-0"
+      >
+        <img
+          alt="Test"
+          className="artist__picture"
+          src=""
+        />
+        Test
+      </label>
+    </div>
+    <div
+      className="artist"
+    >
+      <input
+        className="artist__input visually-hidden"
+        id="answer-1"
+        name="answer"
+        type="radio"
+        value="answer-1"
+      />
+      <label
+        className="artist__name"
+        htmlFor="answer-1"
+      >
+        <img
+          alt="One"
+          className="artist__picture"
+          src=""
+        />
+        One
+      </label>
+    </div>
+    <div
+      className="artist"
+    >
+      <input
+        className="artist__input visually-hidden"
+        id="answer-2"
+        name="answer"
+        type="radio"
+        value="answer-2"
+      />
+      <label
+        className="artist__name"
+        htmlFor="answer-2"
+      >
+        <img
+          alt="Two"
+          className="artist__picture"
+          src=""
+        />
+        Two
+      </label>
+    </div>
+    <div
+      className="artist"
+    >
+      <input
+        className="artist__input visually-hidden"
+        id="answer-3"
+        name="answer"
+        type="radio"
+        value="answer-3"
+      />
+      <label
+        className="artist__name"
+        htmlFor="answer-3"
+      >
+        <img
+          alt="Three"
+          className="artist__picture"
+          src=""
+        />
+        Three
+      </label>
+    </div>
+  </form>
+</section>
+`;

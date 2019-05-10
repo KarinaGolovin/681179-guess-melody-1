@@ -1,22 +1,72 @@
-import React from 'react';
+import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
+import Header from '../header/header.jsx';
 import WelcomeScreen from '../welcome-screen/welcome-screen.jsx';
+import GuessArtistScreen from '../guess-artist-screen/guess-artist-screen.jsx';
+import GuessTrackScreen from '../guess-track-screen/guess-track-screen.jsx';
 
+class App extends PureComponent {
+  constructor(props) {
+    super(props);
 
-const App = (props) => {
-  const {gameTime, errorCount, onClick} = props;
+    this.state = {
+      currentQuestion: -1,
+    };
+  }
 
-  return <WelcomeScreen
-    time={gameTime}
-    errorCount={errorCount}
-    onClick={onClick}
-  />;
-};
+  render() {
+    const {questions} = this.props;
+    const {currentQuestion} = this.state;
+
+    return this._showScreen(questions[currentQuestion], () => {
+      this.setState({
+        currentQuestion: (currentQuestion + 1) >= questions.length ? -1 : currentQuestion + 1,
+      });
+    });
+  }
+
+  _showScreen(currentQuestion, onClick) {
+    if (!currentQuestion) {
+      const {errorCount, gameTime} = this.props;
+
+      return <WelcomeScreen
+        time={gameTime}
+        errorCount={errorCount}
+        onClick={onClick}
+      />;
+    }
+
+    switch (currentQuestion.type) {
+      case `genre`: return (
+        <section className="game game--genre">
+          <Header />
+          <GuessTrackScreen
+            question={currentQuestion}
+            onAnswer={onClick}
+          />
+        </section>
+      );
+
+      case `artist`: return (
+        <section className="game game--artist">
+          <Header />
+          <GuessArtistScreen
+            question={currentQuestion}
+            onAnswer={onClick}
+          />;
+        </section>
+      );
+    }
+
+    return null;
+  }
+}
 
 App.propTypes = {
-  gameTime: PropTypes.number,
-  errorCount: PropTypes.number,
-  onClick: PropTypes.func
+  onClick: PropTypes.func,
+  gameTime: PropTypes.number.isRequired,
+  errorCount: PropTypes.number.isRequired,
+  questions: PropTypes.arrayOf(PropTypes.object.isRequired),
 };
 
 export default App;
