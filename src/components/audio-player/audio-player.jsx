@@ -5,12 +5,12 @@ class AudioPlayer extends PureComponent {
   constructor(props) {
     super(props);
 
-    const {isPlaying} = props;
+    this._audioRef = React.createRef();
 
     this.state = {
       progress: null,
       isLoading: true,
-      isPlaying,
+      isPlaying: props.isPlaying,
     };
 
     this._togglePlayButtonClick = this._togglePlayButtonClick.bind(this);
@@ -28,52 +28,54 @@ class AudioPlayer extends PureComponent {
           onClick={this._togglePlayButtonClick}>
         </button>
         <div className="track__status">
-          <audio/>
+          <audio ref={this._audioRef} src={this.props.trackSrc} />
         </div>
       </Fragment>
     );
   }
 
   componentDidMount() {
-    this._audio = new Audio(this.props.trackSrc);
-
-    this._audio.oncanplaythrough = () => this.setState({
+    this._audioRef.current.oncanplaythrough = () => this.setState({
       isLoading: false,
     });
 
-    this._audio.onplay = () => this.setState({
+    this._audioRef.current.onplay = () => this.setState({
       isPlaying: true,
     });
 
-    this._audio.onpause = () => this.setState({
+    this._audioRef.current.onpause = () => this.setState({
       isPlaying: false,
     });
 
-    this._audio.ontimeupdate = () => this.setState({
-      progress: this._audio.currentTime
+    this._audioRef.current.ontimeupdate = () => this.setState({
+      progress: this._audioRef.current.currentTime
     });
   }
 
-  componentDidUpdate() {
-    if (this.props.isPlaying) {
-      this._audio.play();
-    } else {
-      this._audio.pause();
+  componentDidUpdate(prevProps) {
+    if (prevProps.isPlaying !== this.props.isPlaying) {
+      if (this.props.isPlaying) {
+        this._audioRef.current.play();
+      } else {
+        this._audioRef.current.pause();
+      }
     }
   }
 
   componentWillUnmount() {
-    this._audio.oncanplaythrough = null;
-    this._audio.onplay = null;
-    this._audio.onpause = null;
-    this._audio.ontimeupdate = null;
-    this._audio.src = ``;
-    this._audio = null;
+    this._audioRef.current.oncanplaythrough = null;
+    this._audioRef.current.onplay = null;
+    this._audioRef.current.onpause = null;
+    this._audioRef.current.ontimeupdate = null;
+    this._audioRef.current.src = ``;
+    this._audioRef.current = null;
   }
 
   _togglePlayButtonClick() {
     this.props.handlePlayButtonClick();
-    this.setState({isPlaying: !this.state.isPlaying});
+    this.setState({
+      isPlaying: !this.state.isPlaying
+    });
   }
 }
 

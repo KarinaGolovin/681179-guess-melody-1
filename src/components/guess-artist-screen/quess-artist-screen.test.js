@@ -28,10 +28,16 @@ const mock = {
 };
 
 it(`GuessArtistScreen correctly rendered`, () => {
-  const component = renderer.create(<GuessArtistScreen
-    question={mock}
-    onAnswer={jest.fn()}
-  />).toJSON();
+  const component = renderer.create(
+      <GuessArtistScreen
+        question={mock}
+        onAnswer={jest.fn()}
+      />,
+      {
+        createNodeMock: () => ({
+        })
+      }
+  ).toJSON();
 
   expect(component).toMatchSnapshot();
 });
