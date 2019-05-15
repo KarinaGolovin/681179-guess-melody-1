@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import AudioPlayer from '../audio-player/audio-player.jsx';
 
 const GuessArtistScreen = ({question, onAnswer}) => {
   const {song, answers} = question;
@@ -9,7 +10,9 @@ const GuessArtistScreen = ({question, onAnswer}) => {
       <h2 className="game__title">Кто исполняет эту песню?</h2>
       <div className="game__track">
         <button className="track__button track__button--play" type="button"></button>
-        <audio src={song.trackSrc}></audio>
+        <div className="track__status">
+          <audio src={song.trackSrc}></audio>
+        </div>
       </div>
       <form className="game__artist" onChange={(evt) => {
         return onAnswer(evt.target.value);

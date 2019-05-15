@@ -1,5 +1,6 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
+import AudioPlayer from '../audio-player/audio-player.jsx';
 
 class GuessTrackScreen extends PureComponent {
   constructor(props) {
@@ -25,7 +26,7 @@ class GuessTrackScreen extends PureComponent {
             const isChecked = this.state.formData[`answer-${i}`] || false;
 
             return (
-              <div className="track" key={`answer-${i}`}>
+              <div className="game__track" key={`answer-${i}`}>
                 <button className="track__button track__button--play" type="button"></button>
                 <div className="track__status">
                   <audio src={it.trackSrc}></audio>
