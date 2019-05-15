@@ -8,10 +8,12 @@ class GuessTrackScreen extends PureComponent {
 
     this.state = {
       formData: {},
+      activePlayer: -1,
     };
 
     this._toggleState = this._toggleState.bind(this);
     this._handleSubmit = this._handleSubmit.bind(this);
+    // this._handlePlayButtonClick = this._handlePlayButtonClick.bind(this);
   }
 
   render() {
@@ -26,11 +28,13 @@ class GuessTrackScreen extends PureComponent {
             const isChecked = this.state.formData[`answer-${i}`] || false;
 
             return (
-              <div className="game__track" key={`answer-${i}`}>
-                <button className="track__button track__button--play" type="button"></button>
-                <div className="track__status">
-                  <audio src={it.trackSrc}></audio>
-                </div>
+              <div className="track" key={`answer-${i}`}>
+                <AudioPlayer
+                  trackSrc={it.trackSrc}
+                  isPlaying={i === this.state.activePlayer}
+                  handlePlayButtonClick={() => this.setState({
+                    activePlayer: this.state.activePlayer === i ? -1 : i
+                  })} />
                 <div className="game__answer">
                   <input className="game__input visually-hidden" type="checkbox" name="answer" checked={isChecked} value={`answer-${i}`} id={`answer-${i}`} onChange={this._toggleState} />
                   <label className="game__check" htmlFor={`answer-${i}`}>Отметить</label>
@@ -43,6 +47,12 @@ class GuessTrackScreen extends PureComponent {
       </section>
     );
   }
+
+  // _handlePlayButtonClick(i) {
+  //   this.setState({
+  //     activePlayer: this.state.activePlayer === i ? -1 : i
+  //   });
+  // }
 
   _handleSubmit(evt) {
     evt.preventDefault();
