@@ -13,7 +13,6 @@ class GuessTrackScreen extends PureComponent {
 
     this._toggleState = this._toggleState.bind(this);
     this._handleSubmit = this._handleSubmit.bind(this);
-    // this._handlePlayButtonClick = this._handlePlayButtonClick.bind(this);
   }
 
   render() {
@@ -47,12 +46,6 @@ class GuessTrackScreen extends PureComponent {
       </section>
     );
   }
-
-  // _handlePlayButtonClick(i) {
-  //   this.setState({
-  //     activePlayer: this.state.activePlayer === i ? -1 : i
-  //   });
-  // }
 
   _handleSubmit(evt) {
     evt.preventDefault();

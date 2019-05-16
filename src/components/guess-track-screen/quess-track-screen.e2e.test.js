@@ -14,6 +14,14 @@ const mock = {
         trackSrc: `path`,
         trackGenre: `pop`,
       },
+      {
+        trackSrc: `path`,
+        trackGenre: `pop`,
+      },
+      {
+        trackSrc: `path`,
+        trackGenre: `pop`,
+      },
     ]
   },
 };
@@ -34,4 +42,33 @@ it(`Check if PreventDefault works correctly on GuessTrackScreen submit`, () => {
 
   expect(onAnswer).toHaveBeenCalledTimes(1);
   expect(formSendPrevention).toHaveBeenCalledTimes(1);
+});
+
+it(`Check if onChange supply the right value`, () => {
+  const {question} = mock;
+  const onAnswer = jest.fn();
+
+  const trackScreen = mount(<GuessTrackScreen
+    question={question}
+    onAnswer={onAnswer}
+  />);
+
+  trackScreen.find(`#answer-0`).simulate(`change`, {
+    target: {
+      value: `answer-0`,
+      checked: true
+    }
+  });
+
+  trackScreen.find(`#answer-2`).simulate(`change`, {
+    target: {
+      value: `answer-2`,
+      checked: true
+    }
+  });
+
+  trackScreen.find(`form`).simulate(`submit`);
+
+  expect(onAnswer).toHaveBeenCalledTimes(1);
+  expect(onAnswer).toBeCalledWith([`answer-0`, `answer-2`]);
 });
