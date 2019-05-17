@@ -1,5 +1,6 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
+import AudioPlayer from '../audio-player/audio-player.jsx';
 
 class GuessTrackScreen extends PureComponent {
   constructor(props) {
@@ -7,6 +8,7 @@ class GuessTrackScreen extends PureComponent {
 
     this.state = {
       formData: {},
+      activePlayer: -1,
     };
 
     this._toggleState = this._toggleState.bind(this);
@@ -26,10 +28,12 @@ class GuessTrackScreen extends PureComponent {
 
             return (
               <div className="track" key={`answer-${i}`}>
-                <button className="track__button track__button--play" type="button"></button>
-                <div className="track__status">
-                  <audio src={it.trackSrc}></audio>
-                </div>
+                <AudioPlayer
+                  trackSrc={it.trackSrc}
+                  isPlaying={i === this.state.activePlayer}
+                  handlePlayButtonClick={() => this.setState({
+                    activePlayer: this.state.activePlayer === i ? -1 : i
+                  })} />
                 <div className="game__answer">
                   <input className="game__input visually-hidden" type="checkbox" name="answer" checked={isChecked} value={`answer-${i}`} id={`answer-${i}`} onChange={this._toggleState} />
                   <label className="game__check" htmlFor={`answer-${i}`}>Отметить</label>
