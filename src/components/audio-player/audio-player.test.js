@@ -12,6 +12,9 @@ it(`AudioPlayer correctly renders`, () => {
       />,
       {
         createNodeMock: () => ({
+          play: () => {},
+          pause: () => {},
+          load: () => {}
         })
       }
   ).toJSON();
