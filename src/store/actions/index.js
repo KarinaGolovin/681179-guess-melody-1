@@ -1,15 +1,21 @@
-const incrementQuestion = () => ({
-  type: `INCREMENT_QUESTION`,
-  playload: 1,
-});
+export const incrementQuestion = () => {
+  return {
+    type: `INCREMENT_QUESTION`,
+    playload: 1
+  };
+};
 
-const incrementMistakes = (userAnswer, question, mistakes, maxMistakes) => {
+export const resetGame = () => {
+  return {
+    type: `RESET`
+  };
+};
+
+export const incrementMistakes = (userAnswer, question, mistakes, maxMistakes) => {
   let answerIsCorrect = isCorrectAnswer(userAnswer, question);
 
   if (!answerIsCorrect && mistakes + 1 >= maxMistakes) {
-    return {
-      type: `RESET`
-    };
+    return resetGame();
   }
 
   return {
@@ -31,7 +37,7 @@ const isCorrectAnswer = (userAnswer, question) => {
 
 const isCorrectGenres = (answers, question) => {
   return answers.every((it, i) => {
-    return it === (question.answer[i].genre === question.genre);
+    return it === (question.answers[i].genre === question.genre);
   });
 };
 
@@ -39,7 +45,3 @@ const isCorrectArtist = (answer, question) => {
   return answer.artist === question.song.artist;
 };
 
-export default {
-  incrementQuestion,
-  incrementMistakes
-};

@@ -1,5 +1,5 @@
 const initialState = {
-  questionScreen: -1,
+  currentQuestion: -1,
   mistakes: 0,
 };
 
@@ -7,7 +7,7 @@ const reducer = (state = initialState, action) => {
   switch (action.type) {
     case `INCREMENT_QUESTION`:
       return Object.assign({}, state, {
-        questionScreen: state.questionScreen + action.playload,
+        currentQuestion: state.currentQuestion + action.playload
       });
     case `INCREMENT_MISTAKES`:
       return Object.assign({}, state, {
