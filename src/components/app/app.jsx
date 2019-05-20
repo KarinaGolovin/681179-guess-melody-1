@@ -1,5 +1,6 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
 import Header from '../header/header.jsx';
 import WelcomeScreen from '../welcome-screen/welcome-screen.jsx';
 import GuessArtistScreen from '../guess-artist-screen/guess-artist-screen.jsx';
@@ -9,14 +10,14 @@ class App extends PureComponent {
   constructor(props) {
     super(props);
 
-    this.state = {
-      currentQuestion: -1,
-    };
+    // this.state = {
+    //   currentQuestion: -1,
+    // };
   }
 
   render() {
     const {questions} = this.props;
-    const {currentQuestion} = this.state;
+    // const {currentQuestion} = this.state;
 
     return this._showScreen(questions[currentQuestion], () => {
       this.setState({
@@ -27,12 +28,12 @@ class App extends PureComponent {
 
   _showScreen(currentQuestion, onClick) {
     if (!currentQuestion) {
-      const {errorCount, gameTime} = this.props;
+      const {errorCount, gameTime, onWelcomeScreenClick} = this.props;
 
       return <WelcomeScreen
         time={gameTime}
         errorCount={errorCount}
-        onClick={onClick}
+        onClick={onWelcomeScreenClick}
       />;
     }
 
@@ -42,7 +43,7 @@ class App extends PureComponent {
           <Header />
           <GuessTrackScreen
             question={currentQuestion}
-            onAnswer={onClick}
+            onAnswer={onUserAnswer}
           />
         </section>
       );
@@ -52,7 +53,7 @@ class App extends PureComponent {
           <Header />
           <GuessArtistScreen
             question={currentQuestion}
-            onAnswer={onClick}
+            onAnswer={onUserAnswer}
           />;
         </section>
       );
@@ -60,6 +61,16 @@ class App extends PureComponent {
 
     return null;
   }
+
+  const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
+    currentQuestion: state.questionScreen,
+    currentMistakes: state.mistakes,
+  });
+
+  const mapDispatchToProps = (dispatch) => ({
+    onWelcomeScreenClick,
+    onUserAnswer
+  });
 }
 
 App.propTypes = {
@@ -69,4 +80,8 @@ App.propTypes = {
   questions: PropTypes.arrayOf(PropTypes.object.isRequired),
 };
 
-export default App;
+export {App};
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(App);
