@@ -10,19 +10,19 @@ class AudioPlayer extends PureComponent {
     this.state = {
       progress: null,
       isLoading: true,
-      isPlaying: props.isPlaying,
+      isPlayerActive: props.isPlaying,
     };
 
     this._togglePlayButtonClick = this._togglePlayButtonClick.bind(this);
   }
 
   render() {
-    const {isLoading, isPlaying} = this.state;
+    const {isLoading, isPlayerActive} = this.state;
 
     return (
       <Fragment>
         <button
-          className={`track__button track__button--${isPlaying ? `pause` : `play`}`}
+          className={`track__button track__button--${isPlayerActive ? `pause` : `play`}`}
           type="button"
           disabled={isLoading}
           onClick={this._togglePlayButtonClick}>
@@ -40,25 +40,29 @@ class AudioPlayer extends PureComponent {
     });
 
     this._audioRef.current.onplay = () => this.setState({
-      isPlaying: true,
+      isPlayerActive: true,
     });
 
     this._audioRef.current.onpause = () => this.setState({
-      isPlaying: false,
+      isPlayerActive: false,
     });
 
     this._audioRef.current.ontimeupdate = () => this.setState({
       progress: this._audioRef.current.currentTime
     });
+
+    this._updateAudioPlayer();
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps, prevState) {
+    if (this.state.isPlayerActive !== prevState.isPlayerActive) {
+      this._updateAudioPlayer();
+    }
+
     if (prevProps.isPlaying !== this.props.isPlaying) {
-      if (this.props.isPlaying) {
-        this._audioRef.current.play();
-      } else {
-        this._audioRef.current.pause();
-      }
+      this.setState({
+        isPlayerActive: this.props.isPlaying
+      });
     }
   }
 
@@ -71,10 +75,18 @@ class AudioPlayer extends PureComponent {
     this._audioRef.current = null;
   }
 
+  _updateAudioPlayer() {
+    if (this.state.isPlayerActive) {
+      this._audioRef.current.play();
+    } else {
+      this._audioRef.current.pause();
+    }
+  }
+
   _togglePlayButtonClick() {
     this.props.handlePlayButtonClick();
     this.setState({
-      isPlaying: !this.state.isPlaying
+      isPlayerActive: true
     });
   }
 }

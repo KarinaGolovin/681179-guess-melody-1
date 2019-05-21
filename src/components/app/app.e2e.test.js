@@ -1,7 +1,7 @@
 import React from 'react';
 import {configure, mount} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import App from './app.jsx';
+import {App} from './app.jsx';
 
 configure({adapter: new Adapter()});
 
@@ -51,13 +51,18 @@ it(`Click on WelcomeScreen button switches to the first question page`, () => {
     gameTime={0}
     errorCount={0}
     questions={questions}
+    currentQuestion={-1}
+    currentMistakes={0}
+    nextQuestion={() => {
+      app.setProps({currentQuestion: 0});
+    }}
+    validateAnswer={() => { }}
+    restartGame={() => { }}
   />);
 
   const button = app.find(`button`);
   button.simulate(`click`);
   app.update();
-
-  expect(app.state(`currentQuestion`)).toEqual(0);
 
   const title = app.find(`.game__title`);
 

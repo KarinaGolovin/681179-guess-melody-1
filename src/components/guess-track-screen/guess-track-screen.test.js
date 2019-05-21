@@ -32,6 +32,9 @@ it(`GuessTrackScreen correctly rendered`, () => {
       />,
       {
         createNodeMock: () => ({
+          play: () => {},
+          pause: () => {},
+          load: () => {}
         })
       }
   ).toJSON();

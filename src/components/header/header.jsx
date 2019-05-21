@@ -1,6 +1,10 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import GameMistakeSign from '../game-mistake-sign/game-mistake-sign.jsx';
 
-const Header = () => {
+const Header = (props) => {
+  const {currentMistakes, errorCount} = props;
+
   return (
     <header className="game__header">
       <a className="game__back" href="#">
@@ -18,12 +22,24 @@ const Header = () => {
         <span className="timer__secs">00</span>
       </div>
       <div className="game__mistakes">
-        <div className="wrong"></div>
-        <div className="wrong"></div>
-        <div className="wrong"></div>
+        {
+          Array.from(Array(Math.max(errorCount - currentMistakes, 0))).map((i, index) => {
+            return <GameMistakeSign key={index} mistakeSignState={`correct`} />;
+          })
+        }
+        {
+          Array.from(Array(currentMistakes)).map((i, index) => {
+            return <GameMistakeSign key={index} mistakeSignState={`wrong`} />;
+          })
+        }
       </div>
     </header>
   );
+};
+
+Header.propTypes = {
+  currentMistakes: PropTypes.number,
+  errorCount: PropTypes.number
 };
 
 export default Header;

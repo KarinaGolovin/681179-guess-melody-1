@@ -9,6 +9,11 @@
     "build": "webpack --mode development",
     "start": "webpack-dev-server"
   },
+  "jest": {
+    "setupFilesAfterEnv": [
+      "./setupTests.js"
+    ]
+  },
   "devDependencies": {
     "@babel/core": "7.4.4",
     "@babel/preset-env": "7.4.4",
@@ -33,6 +38,8 @@
     "plural-ru": "^2.0.1",
     "prop-types": "^15.7.2",
     "react": "16.8.6",
-    "react-dom": "16.8.6"
+    "react-dom": "16.8.6",
+    "react-redux": "7.0.3",
+    "redux": "4.0.1"
   }
 }

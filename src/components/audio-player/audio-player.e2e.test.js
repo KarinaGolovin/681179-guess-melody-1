@@ -8,19 +8,6 @@ configure({adapter: new Adapter()});
 describe(`Tests AudioPlayer toggle on button click`, () => {
   it(`Check if AudioPlayer state correctly changes`, () => {
     const handlePlayButtonClick = jest.fn();
-
-    Object.defineProperty(AudioPlayer.prototype, `_audioRef`, {
-      get: () => {
-        return {
-          current: {
-            play: () => {},
-            pause: () => {}
-          }
-        };
-      },
-      set: () => {}
-    });
-
     const component = mount(<AudioPlayer
       trackSrc={`https://upload.wikimedia.org/wikipedia/commons/1/1f/Uganda_flag_and_national_anthem_-_Oh_Uganda_Land_o.ogg`}
       isPlaying={false}
@@ -34,7 +21,7 @@ describe(`Tests AudioPlayer toggle on button click`, () => {
     component.find(`.track__button`).simulate(`click`);
 
     expect(handlePlayButtonClick).toHaveBeenCalledTimes(1);
-    expect(component.state(`isPlaying`)).toBeTruthy();
+    expect(component.state(`isPlayerActive`)).toBeTruthy();
   });
 
   it(`Check if AudioPlayer change state correctly toggle`, () => {

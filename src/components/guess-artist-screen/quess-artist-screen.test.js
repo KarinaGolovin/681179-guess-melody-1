@@ -35,6 +35,9 @@ it(`GuessArtistScreen correctly rendered`, () => {
       />,
       {
         createNodeMock: () => ({
+          play: () => {},
+          pause: () => {},
+          load: () => {}
         })
       }
   ).toJSON();
