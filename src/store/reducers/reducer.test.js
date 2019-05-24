@@ -33,7 +33,7 @@ it(`Expect that mistakes counter would be incremented by 1`, () => {
   expect(result).toEqual(expected);
 });
 
-it(`Expect that question counter would be incremented by 1`, () => {
+it(`Expect that state will be reset`, () => {
   const result = reducer({
     currentQuestion: 100,
     mistakes: 99,

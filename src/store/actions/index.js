@@ -1,7 +1,10 @@
+export const INCREMENT_QUESTION = `INCREMENT_QUESTION`;
+export const INCREMENT_MISTAKES = `INCREMENT_MISTAKES`;
+
 export const incrementQuestion = () => {
   return {
-    type: `INCREMENT_QUESTION`,
-    playload: 1
+    type: INCREMENT_QUESTION,
+    payload: 1
   };
 };
 
@@ -12,15 +15,15 @@ export const resetGame = () => {
 };
 
 export const incrementMistakes = (userAnswer, question, mistakes, maxMistakes) => {
-  let answerIsCorrect = isCorrectAnswer(userAnswer, question);
+  const answerIsCorrect = isCorrectAnswer(userAnswer, question);
 
   if (!answerIsCorrect && mistakes + 1 >= maxMistakes) {
     return resetGame();
   }
 
   return {
-    type: `INCREMENT_MISTAKES`,
-    playload: answerIsCorrect ? 0 : 1,
+    type: INCREMENT_MISTAKES,
+    payload: answerIsCorrect ? 0 : 1,
   };
 };
 
