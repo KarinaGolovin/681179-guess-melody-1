@@ -8,15 +8,19 @@ const initialState = {
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case INCREMENT_QUESTION:
-      return Object.assign({}, state, {
+      return {
+        ...state,
         currentQuestion: state.currentQuestion + action.payload
-      });
+      };
     case INCREMENT_MISTAKES:
-      return Object.assign({}, state, {
-        mistakes: state.mistakes + action.payload,
-      });
+      return {
+        ...state,
+        mistakes: state.mistakes + action.payload
+      };
     case `RESET`:
-      return Object.assign({}, initialState);
+      return {
+        ...initialState
+      };
   }
 
   return state;

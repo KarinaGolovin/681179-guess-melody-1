@@ -13,7 +13,7 @@ it(`Expect that question counter would be incremented by 1`, () => {
 
   const result = reducer(initialState, {
     type: `INCREMENT_QUESTION`,
-    playload: 1
+    payload: 1
   });
 
   expect(result).toEqual(expected);
@@ -27,7 +27,7 @@ it(`Expect that mistakes counter would be incremented by 1`, () => {
 
   const result = reducer(initialState, {
     type: `INCREMENT_MISTAKES`,
-    playload: 1
+    payload: 1
   });
 
   expect(result).toEqual(expected);

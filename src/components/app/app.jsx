@@ -6,6 +6,11 @@ import Header from '../header/header.jsx';
 import WelcomeScreen from '../welcome-screen/welcome-screen.jsx';
 import GuessArtistScreen from '../guess-artist-screen/guess-artist-screen.jsx';
 import GuessTrackScreen from '../guess-track-screen/guess-track-screen.jsx';
+import withActivePlayer from '../../hocs/with-active-player/with-active-player';
+import withUserAnswers from '../../hocs/with-user-answers/with-user-answers';
+
+const GuessTrackScreenWrapped = withUserAnswers(withActivePlayer(GuessTrackScreen));
+const GuessArtistScreenWrapped = withActivePlayer(GuessArtistScreen);
 
 export class App extends PureComponent {
   render() {
@@ -46,7 +51,7 @@ export class App extends PureComponent {
             errorCount={errorCount}
             gameTime={gameTime}
           />
-          <GuessTrackScreen
+          <GuessTrackScreenWrapped
             question={question}
             onAnswer={(userAnswer) => {
               this._nextQuestion();
@@ -63,13 +68,13 @@ export class App extends PureComponent {
             errorCount={errorCount}
             gameTime={gameTime}
           />
-          <GuessArtistScreen
+          <GuessArtistScreenWrapped
             question={question}
             onAnswer={(userAnswer) => {
               this._nextQuestion();
               validateAnswer(userAnswer, question, currentMistakes, errorCount);
             }}
-          />;
+          />
         </section>
       );
     }

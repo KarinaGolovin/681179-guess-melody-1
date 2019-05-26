@@ -1,6 +1,9 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 import GuessArtistScreen from './guess-artist-screen.jsx';
+import withActivePlayer from '../../hocs/with-active-player/with-active-player';
+const GuessArtistScreenWrapped = withActivePlayer(GuessArtistScreen);
+
 
 const mock = {
   song: {
@@ -29,7 +32,7 @@ const mock = {
 
 it(`GuessArtistScreen correctly rendered`, () => {
   const component = renderer.create(
-      <GuessArtistScreen
+      <GuessArtistScreenWrapped
         question={mock}
         onAnswer={jest.fn()}
       />,
