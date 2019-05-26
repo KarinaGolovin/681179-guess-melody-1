@@ -13,7 +13,7 @@ const GameOverScreen = (props) => {
 };
 
 GameOverScreen.propTypes = {
-  restartGame: PropTypes.number,
+  restartGame: PropTypes.func,
 };
 
 export default GameOverScreen;

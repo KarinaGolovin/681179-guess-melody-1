@@ -35,17 +35,7 @@ export class App extends PureComponent {
   _showScreen(question) {
     const {errorCount, gameTime, currentMistakes, validateAnswer, restartGame, currentQuestion} = this.props;
 
-    if (!question && currentQuestion === -1) {
-      return <WelcomeScreen
-        time={gameTime}
-        errorCount={errorCount}
-        onClick={() => {
-          this._nextQuestion();
-        }}
-      />;
-    }
-
-    if (!question && currentMistakes < errorCount) {
+    if (!question && currentMistakes < errorCount && currentQuestion !== -1) {
       return <WinScreen
         currentMistakes={currentMistakes}
         restartGame={restartGame}
@@ -55,6 +45,16 @@ export class App extends PureComponent {
     if (currentMistakes >= errorCount) {
       return <GameOverScreen
         restartGame={restartGame}
+      />;
+    }
+
+    if (!question) {
+      return <WelcomeScreen
+        time={gameTime}
+        errorCount={errorCount}
+        onClick={() => {
+          this._nextQuestion();
+        }}
       />;
     }
 
@@ -69,8 +69,10 @@ export class App extends PureComponent {
           <GuessTrackScreenWrapped
             question={question}
             onAnswer={(userAnswer) => {
-              this._nextQuestion();
-              validateAnswer(userAnswer, question, currentMistakes, errorCount);
+              if (userAnswer.length > 0) {
+                this._nextQuestion();
+                validateAnswer(userAnswer, question, currentMistakes, errorCount);
+              }
             }}
           />
         </section>

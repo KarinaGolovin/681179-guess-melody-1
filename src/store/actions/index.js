@@ -14,12 +14,8 @@ export const resetGame = () => {
   };
 };
 
-export const incrementMistakes = (userAnswer, question, mistakes, maxMistakes) => {
+export const incrementMistakes = (userAnswer, question) => {
   const answerIsCorrect = isCorrectAnswer(userAnswer, question);
-
-  // if (!answerIsCorrect && mistakes + 1 >= maxMistakes) {
-  //   return resetGame();
-  // }
 
   return {
     type: INCREMENT_MISTAKES,
@@ -39,7 +35,7 @@ const isCorrectAnswer = (userAnswer, question) => {
 };
 
 const isCorrectGenres = (answers, question) => {
-  return answers.every((it, i) => {
+  return answers.length && answers.every((it, i) => {
     return it === (question.answers[i].genre === question.genre);
   });
 };
