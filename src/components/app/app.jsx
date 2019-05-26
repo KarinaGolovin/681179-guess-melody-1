@@ -42,7 +42,7 @@ export class App extends PureComponent {
       />;
     }
 
-    if (currentMistakes >= errorCount) {
+    if (currentMistakes >= errorCount && currentQuestion !== -1) {
       return <GameOverScreen
         restartGame={restartGame}
       />;
