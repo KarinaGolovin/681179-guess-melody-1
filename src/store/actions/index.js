@@ -17,9 +17,9 @@ export const resetGame = () => {
 export const incrementMistakes = (userAnswer, question, mistakes, maxMistakes) => {
   const answerIsCorrect = isCorrectAnswer(userAnswer, question);
 
-  if (!answerIsCorrect && mistakes + 1 >= maxMistakes) {
-    return resetGame();
-  }
+  // if (!answerIsCorrect && mistakes + 1 >= maxMistakes) {
+  //   return resetGame();
+  // }
 
   return {
     type: INCREMENT_MISTAKES,

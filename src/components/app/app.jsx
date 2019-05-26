@@ -6,6 +6,8 @@ import Header from '../header/header.jsx';
 import WelcomeScreen from '../welcome-screen/welcome-screen.jsx';
 import GuessArtistScreen from '../guess-artist-screen/guess-artist-screen.jsx';
 import GuessTrackScreen from '../guess-track-screen/guess-track-screen.jsx';
+import WinScreen from '../win-screen/win-screen.jsx';
+import GameOverScreen from '../game-over-screen/game-over-screen.jsx';
 import withActivePlayer from '../../hocs/with-active-player/with-active-player';
 import withUserAnswers from '../../hocs/with-user-answers/with-user-answers';
 
@@ -31,15 +33,28 @@ export class App extends PureComponent {
   }
 
   _showScreen(question) {
-    const {errorCount, gameTime, currentMistakes, validateAnswer} = this.props;
+    const {errorCount, gameTime, currentMistakes, validateAnswer, restartGame, currentQuestion} = this.props;
 
-    if (!question) {
+    if (!question && currentQuestion === -1) {
       return <WelcomeScreen
         time={gameTime}
         errorCount={errorCount}
         onClick={() => {
           this._nextQuestion();
         }}
+      />;
+    }
+
+    if (!question && currentMistakes < errorCount) {
+      return <WinScreen
+        currentMistakes={currentMistakes}
+        restartGame={restartGame}
+      />;
+    }
+
+    if (currentMistakes >= errorCount) {
+      return <GameOverScreen
+        restartGame={restartGame}
       />;
     }
 
