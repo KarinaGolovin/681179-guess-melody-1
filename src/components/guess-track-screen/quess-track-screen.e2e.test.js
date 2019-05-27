@@ -2,6 +2,9 @@ import React from 'react';
 import {configure, mount} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import GuessTrackScreen from './guess-track-screen.jsx';
+import withActivePlayer from '../../hocs/with-active-player/with-active-player';
+import withUserAnswers from '../../hocs/with-user-answers/with-user-answers';
+const GuessTrackScreenWrapped = withUserAnswers(withActivePlayer(GuessTrackScreen));
 
 configure({adapter: new Adapter()});
 
@@ -29,7 +32,7 @@ const mock = {
 it(`Check if PreventDefault works correctly on GuessTrackScreen submit`, () => {
   const {question} = mock;
   const onAnswer = jest.fn();
-  const trackScreen = mount(<GuessTrackScreen
+  const trackScreen = mount(<GuessTrackScreenWrapped
     onAnswer={onAnswer}
     question={question}
   />);
@@ -48,7 +51,7 @@ it(`Check if onChange supply the right value`, () => {
   const {question} = mock;
   const onAnswer = jest.fn();
 
-  const trackScreen = mount(<GuessTrackScreen
+  const trackScreen = mount(<GuessTrackScreenWrapped
     question={question}
     onAnswer={onAnswer}
   />);

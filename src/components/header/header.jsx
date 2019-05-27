@@ -23,12 +23,12 @@ const Header = (props) => {
       </div>
       <div className="game__mistakes">
         {
-          Array.from(Array(Math.max(errorCount - currentMistakes, 0))).map((i, index) => {
+          Array.from(Array(Math.max(errorCount - currentMistakes, 0))).map((it, index) => {
             return <GameMistakeSign key={index} mistakeSignState={`correct`} />;
           })
         }
         {
-          Array.from(Array(currentMistakes)).map((i, index) => {
+          Array.from(Array(currentMistakes)).map((it, index) => {
             return <GameMistakeSign key={index} mistakeSignState={`wrong`} />;
           })
         }

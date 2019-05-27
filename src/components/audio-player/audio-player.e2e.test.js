@@ -2,13 +2,14 @@ import React from 'react';
 import {configure, mount} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import AudioPlayer from './audio-player.jsx';
-
+import withAudio from '../../hocs/with-audio/with-audio';
+const AudioPlayerWrapped = withAudio(AudioPlayer);
 configure({adapter: new Adapter()});
 
 describe(`Tests AudioPlayer toggle on button click`, () => {
   it(`Check if AudioPlayer state correctly changes`, () => {
     const handlePlayButtonClick = jest.fn();
-    const component = mount(<AudioPlayer
+    const component = mount(<AudioPlayerWrapped
       trackSrc={`https://upload.wikimedia.org/wikipedia/commons/1/1f/Uganda_flag_and_national_anthem_-_Oh_Uganda_Land_o.ogg`}
       isPlaying={false}
       handlePlayButtonClick={handlePlayButtonClick}
@@ -21,12 +22,12 @@ describe(`Tests AudioPlayer toggle on button click`, () => {
     component.find(`.track__button`).simulate(`click`);
 
     expect(handlePlayButtonClick).toHaveBeenCalledTimes(1);
-    expect(component.state(`isPlayerActive`)).toBeTruthy();
+    expect(component.state(`isPlaying`)).toBeTruthy();
   });
 
   it(`Check if AudioPlayer change state correctly toggle`, () => {
     const handlePlayButtonClick = jest.fn();
-    const component = mount(<AudioPlayer
+    const component = mount(<AudioPlayerWrapped
       trackSrc={``}
       isPlaying={false}
       handlePlayButtonClick={handlePlayButtonClick}
@@ -38,7 +39,6 @@ describe(`Tests AudioPlayer toggle on button click`, () => {
 
     playButton.simulate(`click`);
     playButton.simulate(`click`);
-
     expect(component.state(`isPlaying`)).toBeFalsy();
   });
 });

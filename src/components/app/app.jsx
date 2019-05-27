@@ -6,6 +6,13 @@ import Header from '../header/header.jsx';
 import WelcomeScreen from '../welcome-screen/welcome-screen.jsx';
 import GuessArtistScreen from '../guess-artist-screen/guess-artist-screen.jsx';
 import GuessTrackScreen from '../guess-track-screen/guess-track-screen.jsx';
+import WinScreen from '../win-screen/win-screen.jsx';
+import GameOverScreen from '../game-over-screen/game-over-screen.jsx';
+import withActivePlayer from '../../hocs/with-active-player/with-active-player';
+import withUserAnswers from '../../hocs/with-user-answers/with-user-answers';
+
+const GuessTrackScreenWrapped = withUserAnswers(withActivePlayer(GuessTrackScreen));
+const GuessArtistScreenWrapped = withActivePlayer(GuessArtistScreen);
 
 export class App extends PureComponent {
   render() {
@@ -26,7 +33,20 @@ export class App extends PureComponent {
   }
 
   _showScreen(question) {
-    const {errorCount, gameTime, currentMistakes, validateAnswer} = this.props;
+    const {errorCount, gameTime, currentMistakes, validateAnswer, restartGame, currentQuestion} = this.props;
+
+    if (!question && currentMistakes < errorCount && currentQuestion !== -1) {
+      return <WinScreen
+        currentMistakes={currentMistakes}
+        restartGame={restartGame}
+      />;
+    }
+
+    if (currentMistakes >= errorCount && currentQuestion !== -1) {
+      return <GameOverScreen
+        restartGame={restartGame}
+      />;
+    }
 
     if (!question) {
       return <WelcomeScreen
@@ -46,11 +66,13 @@ export class App extends PureComponent {
             errorCount={errorCount}
             gameTime={gameTime}
           />
-          <GuessTrackScreen
+          <GuessTrackScreenWrapped
             question={question}
             onAnswer={(userAnswer) => {
-              this._nextQuestion();
-              validateAnswer(userAnswer, question, currentMistakes, errorCount);
+              if (userAnswer.length > 0) {
+                this._nextQuestion();
+                validateAnswer(userAnswer, question, currentMistakes, errorCount);
+              }
             }}
           />
         </section>
@@ -63,13 +85,13 @@ export class App extends PureComponent {
             errorCount={errorCount}
             gameTime={gameTime}
           />
-          <GuessArtistScreen
+          <GuessArtistScreenWrapped
             question={question}
             onAnswer={(userAnswer) => {
               this._nextQuestion();
               validateAnswer(userAnswer, question, currentMistakes, errorCount);
             }}
-          />;
+          />
         </section>
       );
     }
